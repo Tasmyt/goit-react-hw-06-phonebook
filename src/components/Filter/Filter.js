@@ -1,6 +1,17 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilter } from '../../redax/selectors';
+import { filterContacts } from 'redax/filterSlice';
+
 import PropTypes from 'prop-types';
 import { Input } from "./Filter.styled";
-export const Filter = ({ filter, changeFilter }) => {
+
+export const Filter = () => {
+  const filter = useSelector(getFilter);  
+  const dispatch = useDispatch();
+  const changeFilter = e => {
+    dispatch(filterContacts(e.currentTarget.value));
+  }
+
   return (
       <>
       <Input type="text" name="filter" value={filter} onChange={changeFilter}  />
